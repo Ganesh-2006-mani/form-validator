@@ -2,46 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Form Validator</title>
+  <title>Animated Form Validator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h2>Registration Form</h2>
-
   <form id="form">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" id="name">
-      <small></small>
+
+    <h2>Signup Form</h2>
+
+    <!-- USERNAME -->
+    <div class="input-group">
+      <input type="text" id="username" required>
+      <label>Username</label>
+      <small>Error message</small>
     </div>
 
-    <div class="form-group">
+    <!-- EMAIL -->
+    <div class="input-group">
+      <input type="email" id="email" required>
       <label>Email</label>
-      <input type="text" id="email">
-      <small></small>
+      <small>Error message</small>
     </div>
 
-    <div class="form-group">
+    <!-- PASSWORD -->
+    <div class="input-group">
+      <input type="password" id="password" required>
       <label>Password</label>
-      <input type="password" id="password">
-      <small></small>
+      <small>Error message</small>
     </div>
 
-    <div class="form-group">
+    <!-- CONFIRM -->
+    <div class="input-group">
+      <input type="password" id="confirm" required>
       <label>Confirm Password</label>
-      <input type="password" id="confirmPassword">
-      <small></small>
+      <small>Error message</small>
     </div>
 
-    <div class="form-group">
-      <label>Phone</label>
-      <input type="text" id="phone">
-      <small></small>
-    </div>
+    <button type="submit">Submit</button>
 
-    <button type="submit">Register</button>
   </form>
 </div>
 
