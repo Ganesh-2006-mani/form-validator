@@ -1,66 +1,73 @@
 const form = document.getElementById("form");
-const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirmPassword");
-const phoneInput = document.getElementById("phone");
 
-form.addEventListener("submit", function (e) {
+const username = document.getElementById("username");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const confirm = document.getElementById("confirm");
+
+// FORM SUBMIT
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  checkInputs();
+
+  validateInputs();
 });
 
-function checkInputs() {
-  const nameValue = nameInput.value.trim();
-  const emailValue = emailInput.value.trim();
-  const passwordValue = passwordInput.value.trim();
-  const confirmPasswordValue = confirmPasswordInput.value.trim();
-  const phoneValue = phoneInput.value.trim();
+// VALIDATION
+function validateInputs() {
+  const userVal = username.value.trim();
+  const emailVal = email.value.trim();
+  const passVal = password.value.trim();
+  const confirmVal = confirm.value.trim();
 
-  // Name
-  if (!/^[A-Za-z]{3,}$/.test(nameValue)) {
-    setError(nameInput, "Name must be at least 3 letters");
+  // USERNAME
+  if (userVal === "") {
+    setError(username, "Username required");
   } else {
-    setSuccess(nameInput);
+    setSuccess(username);
   }
 
-  // Email
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
-    setError(emailInput, "Email is not valid");
+  // EMAIL
+  if (!validateEmail(emailVal)) {
+    setError(email, "Invalid email");
   } else {
-    setSuccess(emailInput);
+    setSuccess(email);
   }
 
-  // Password
-  if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(passwordValue)) {
-    setError(passwordInput, "Password must be 8 chars, 1 uppercase, 1 number, 1 symbol");
+  // PASSWORD
+  if (passVal.length < 6) {
+    setError(password, "Min 6 characters");
   } else {
-    setSuccess(passwordInput);
+    setSuccess(password);
   }
 
-  // Confirm Password
-  if (confirmPasswordValue !== passwordValue || confirmPasswordValue === "") {
-    setError(confirmPasswordInput, "Passwords do not match");
+  // CONFIRM
+  if (confirmVal !== passVal || confirmVal === "") {
+    setError(confirm, "Passwords not match");
   } else {
-    setSuccess(confirmPasswordInput);
-  }
-
-  // Phone
-  if (!/^\d{10}$/.test(phoneValue)) {
-    setError(phoneInput, "Phone must be 10 digits");
-  } else {
-    setSuccess(phoneInput);
+    setSuccess(confirm);
   }
 }
 
+// ERROR
 function setError(input, message) {
-  const formGroup = input.parentElement;
-  const small = formGroup.querySelector("small");
-  formGroup.className = "form-group error";
+  const group = input.parentElement;
+  const small = group.querySelector("small");
+
+  group.classList.add("error");
+  group.classList.remove("success");
+
   small.innerText = message;
 }
 
+// SUCCESS
 function setSuccess(input) {
-  const formGroup = input.parentElement;
-  formGroup.className = "form-group success";
+  const group = input.parentElement;
+
+  group.classList.add("success");
+  group.classList.remove("error");
+}
+
+// EMAIL VALIDATION
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
